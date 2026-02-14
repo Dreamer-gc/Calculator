@@ -5,10 +5,8 @@ window.title("Calculator")
 expression=""
 def exp(n):
     global expression
-    f=dis.get()
     expression+=str(n)
-    f+=str(n)
-    I_T.set(f)
+    I_T.set(expression)
     pass
 def equal():
     global expression
@@ -20,31 +18,14 @@ def equal():
         I_T.set("INVALID INPUT")
         pass
     pass
-
+def dele():
+    global expression
+    expression=expression[:-1]
+    I_T.set(expression)
 def clear():
     global expression
     expression=""
     I_T.set(expression)
-    pass
-def div():
-    global expression
-    expression+="/"
-    I_T.set("")
-    pass
-def add():
-    global expression
-    expression+="+"
-    I_T.set("")
-    pass
-def sub():
-    global expression
-    expression+="-"
-    I_T.set("")
-    pass
-def mul():
-    global expression
-    expression+="*"
-    I_T.set("")
     pass
 I_T=StringVar()
 dis=Entry(window,textvariable=I_T,bd=5,font=("Arial",20))
@@ -60,28 +41,14 @@ for (text,row,col) in buttons:
         eq=Button(window,text=text,command=equal,font=("Arial",18))
         eq.grid(row=row,column=col,sticky=NSEW)
         pass
-    elif text=="/":
-        btn=Button(window,text=text,command=div,font=("Arial",18))
-        btn.grid(row=row,column=col,sticky=NSEW)
-        pass
-    elif text=="*":
-        btn=Button(window,text=text,command=mul,font=("Arial",18))
-        btn.grid(row=row,column=col,sticky=NSEW)
-        pass
-    elif text=="+":
-        btn=Button(window,text=text,command=add,font=("Arial",18))
-        btn.grid(row=row,column=col,sticky=NSEW)
-        pass
-    elif text=="-":
-        btn=Button(window,text=text,command=sub,font=("Arial",18))
-        btn.grid(row=row,column=col,sticky=NSEW)
-        pass
     else:
         bt=Button(window,text=text,command=lambda t=text: exp(t),font=("Arial",18))
         bt.grid(row=row,column=col,sticky=NSEW)
     pass
 ac=Button(window,text="Ac",command=clear,font=("Arial",18))
-ac.grid(row=5,column=0,columnspan=4,sticky=NSEW)
+ac.grid(row=5,column=0,columnspan=3,sticky=NSEW)
+ac=Button(window,text="X",command=dele,font=("Arial",18))
+ac.grid(row=5,column=3,sticky=NSEW)
 
 for i in range(6):
     window.rowconfigure(i,weight=1)
